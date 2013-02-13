@@ -40,6 +40,7 @@ function cb1() {
 				if (the_o.output!=null && the_o.output.length>0) {
 					print(the_o.output);
 				} else {
+					current_pre.textContent += the_o.superaddition;
 				}
 			}catch(ex){
 				$('remoteerr').textContent = "ERROR:PHP \n" + http_request.responseText;
@@ -69,24 +70,32 @@ function send(){
 	}
 }
 function setleft(txt){
-	topbar.className='';
+	txtin.style.width="99%";
 	inleft.textContent=txt;
 	txtin.style.paddingLeft=inleft.offsetWidth+'px';
-	topbar.className='topbarSpace';
+	txtin.style.width="100%";
 }
-//window.addEventListener("scroll",posfix,false);
+function posfix(){
+	if (input.className != "fixedBottom")  {
+		if ((input.offsetTop+input.offsetHeight)>document.body.clientHeight) {
+			input.className = "fixedBottom";
+			$("spacer").style.height = input.offsetHeight+'px';
+		}
+	} else {
+		if (($("spacer").offsetTop+input.offsetHeight)<document.body.clientHeight) {
+			input.className = "";
+			$("spacer").style.height = '0px';
+		}
+	}
+}
+window.addEventListener("resize",posfix,false);
 function print(txt){
 	x = document.createElement("pre");
 	x.textContent=txt;
 	output.appendChild(x);
 	current_pre = x;
 	window.scrollBy(0,x.offsetHeight);
-	if (input.className != "fixedBottom")  {
-		if ((input.offsetTop+input.offsetHeight)>document.body.clientHeight) {
-			input.className = "fixedBottom";
-			$("spacer").style.height = input.offsetHeight+'px';
-		}
-	}
+	posfix();
 	window.scrollBy(0,x.offsetHeight);
 	txtin.focus();
 }
@@ -108,8 +117,8 @@ function keydown1(e){
 function phpevalshow(){phpeval.style.display='';phpevalin.value='';phpevalin.focus()}
 function phpevalhide(){phpeval.style.display='none';}
 function phpevalrun(){
-    print(inleft.textContent + "Execute PHP Script!\n<?php \n"+phpevalin.value+"\n");
-	output.appendChild(document.createElement("hr"));
+	print(" ");
+    print(inleft.textContent + "Execute PHP Script!\n<?php \n"+phpevalin.value+"\n?>");
     http_request = XHR_Create();
     http_request.open("POST","?execute", true);
     http_request.onreadystatechange = cb1;
@@ -118,6 +127,17 @@ function phpevalrun(){
     inright.className = "waiting";
     inright.disabled = true;
     inright.value = "Working...";
+}
+function prockill(){
+    print(inleft.textContent + "_SPECIAL_KILL_CURRENT_PROC");
+    http_request = XHR_Create();
+    http_request.open("POST","?execute", true);
+    http_request.onreadystatechange = cb1;
+    http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    http_request.send("cmd=_SPECIAL_KILL_CURRENT_PROC&cwd=" + encodeURIComponent($('cwd').textContent));
+    inright.className = "waiting";
+    inright.disabled = true;
+    inright.value = "Killing...";
 }
 txtin.style.paddingRight=inright.offsetWidth+'px';
 setleft('>>');
