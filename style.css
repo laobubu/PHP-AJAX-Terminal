@@ -1,0 +1,132 @@
+@charset "utf-8";
+body {
+	color: #CCCCCC;
+	background: #000000;
+	margin: 0px;
+	overflow-x:hidden;
+}
+* {
+	font: 18px "Courier New", Courier, monospace;
+}
+#output {
+	padding:0.5em;
+	margin: 0px;
+}
+#output pre {
+	padding:0px;
+	margin: 0px;
+}
+#topbar {
+	overflow: hidden;
+	background: #333333;
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	box-shadow: 0 0 0.5em black inset;
+	overflow-y:scroll;
+}
+#topbar jar {
+	padding: 0.3em;
+	display:block
+}
+#topbar *{
+	font-size: 12px;
+	color: #CCCCCC;
+}
+.topbarSpace {
+	height: 4em;
+	width: 100%;
+}
+.fixedBottom {
+	position:fixed;
+	bottom: 0px;
+	left:0px;
+	width:100%;
+	background: black;
+}
+#in {
+	background:#111;
+	border:none;
+	color: #CCCCCC;
+	width:100%;
+	padding: 1px 0px;
+	margin: 0px;
+}
+#inleft {
+	padding-top: 1px;
+	margin: 0px;
+	position:absolute;
+	z-index:99;
+}
+#inright {
+	background:#222;
+	border:none;
+	color: #CCCCCC;
+	padding: 1px 2px;
+	margin: 0px;
+	right:0px;
+	position:absolute;
+	z-index:99;
+}
+@-webkit-keyframes animate-w {
+	0% {background:#222;}
+	50% {background:#888;}
+	100% {background:#222;}  
+}
+@-moz-keyframes animate-m {
+	0% {background:#222;}
+	50% {background:#888;}
+	100% {background:#222;}  
+}
+.waiting {
+	-webkit-animation: animate-w 2s linear infinite;
+	-moz-animation: animate-m 2s linear infinite;
+}
+::-webkit-scrollbar {
+    width: 20px;
+}
+::-webkit-scrollbar-track {
+	background: #333;
+    -webkit-box-shadow: inset 0 0 6px black;
+}
+::-webkit-scrollbar-thumb {
+	background: #CCC;
+    border-radius: 5px;
+    -webkit-box-shadow: inset 0 0 6px black; 
+}
+#phpeval {
+	background: #333333;
+	padding: 10px;
+	position: fixed;
+	z-index: 9999;
+	left: 10%;
+	top: 10%;
+	right: 10%;
+	bottom: 10%;
+	box-shadow: 0 0 0.5em black inset , 0 0 0.5em black;
+}
+#phpeval textarea, #phpeval input {
+	border: none;
+	box-shadow: 0 0 0.5em black;
+}
+#phpeval textarea {
+	height: 80%;
+	width: 100%;
+	background: #555;
+	color: #EEE;
+}
+#phpeval input {
+	color: #CCC;
+	background: #555;
+	padding:0.3em;
+	margin:0.5em;
+}
+#phpeval .topb1 a{
+	color: #CCC;
+	text-decoration:none;
+	background: #555;
+	width:1.5em;
+	height:1.5em;
+	line-height:1.5em;
+	float:right;
+}
